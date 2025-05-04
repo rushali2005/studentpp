@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 🔒 Admins have full access based on custom claim 'role'
+    match /{document=**} {
+      allow read, write: if request.auth != null &&
+                         request.auth.token.role == 'admin';
+    }
+
+    // 👤 Users can only read/write their own profile and predictions
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+       match /predictions/{docId} {
+      allow read, write: if true;  // 🚨 public for testing only
+    }
+  }
+}
