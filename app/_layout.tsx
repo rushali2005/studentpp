@@ -8,9 +8,7 @@ const _layout = () => {
         <Stack.Screen name="welcome"/>
         <Stack.Screen name="login"/>
         <Stack.Screen name="register"/>
-        <Stack.Screen name="home"/>
-        
-        
+        <Stack.Screen name="predict"/>
       </Stack>
     
   );
